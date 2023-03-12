@@ -71,7 +71,7 @@
     }
 
     .bridge-status.active {
-      background-color: #31764c; /* Change the background color*/
+      background-color: #25362c75; /* Change the background color*/
     }
 
     .buttons {
@@ -199,7 +199,7 @@
       
         </div>
 
-        <div class="bridge-status" id="bridge4" data-lat="47.58984" data-lng="-122.26942" data-size="800" data-status="Good" data-bridge_name="Homer M. Hadley Memorial Bridge ">
+        <div class="bridge-status" id="bridge4" data-lat="47.58984" data-lng="-122.26942" data-size="1200" data-status="Good" data-bridge_name="Homer M. Hadley Memorial Bridge ">
           <h3>Homer M. Hadley Memorial Bridge (Third Lake Washington Bridge)</h3>
           <div class="buttons">
             <button class="good">Good</button>
@@ -279,18 +279,20 @@
               map: map
             });
 
-            // const popup = new google.maps.InfoWindow({
-            //   content: "<div class='popup'>Hello, world!</div>",
-            // });
+       
 
             console.log("inpopup");
 
             const popup = new google.maps.InfoWindow({
             content: `
               <div class='popup'>
-                <h2><strong>${bridge_name}</strong></h2>
+                <h1 style='color: green; font-family: "Noto Sans", sans-serif;'><strong>${bridge_name}</strong></h1>
+                <h2 style="font-family: 'Noto Sans', sans-serif; color: black;">Status: <strong><span class='${status.toLowerCase()}' style='background-color: ${
+        status === "Good" ? "green" : status === "Poor" ? "red" : "yellow"
+      }; color: ${status === "Fair" ? "black" : "white"};'>${status}</span></strong></h2>
+
+
                 <img src="/static/visualization_{{ id }}.png" alt="Visualization">
-                <p>Status: <strong><span class='${status.toLowerCase()}'>${status}</span></strong></p>
               </div>
             `,
           });
@@ -368,25 +370,7 @@
         });
         const bridgeStatuses = document.querySelectorAll('.bridge-status');
 
-        // for (let i = 0; i < bridgeStatuses.length; i++) {
-        //   bridgeStatuses[i].addEventListener('click', function() {
-        //     // Remove active class from all bridge-status divs
-        //     this.style.backgroundColor = 'rgb(220, 220, 220)';
-        //   });
-
-        // for (let i = 0; i < bridgeStatuses.length; i++) {
-        //   bridgeStatuses[i].addEventListener('click', function() {
-        //     const status = this.dataset.status;
-        //     if (status === 'Good') {
-        //       this.style.backgroundColor = 'rgb(54, 210, 54)';
-        //     } else if (status === 'Fair') {
-        //       this.style.backgroundColor = 'rgb(246, 188, 64)';
-        //     } else if (status === 'Poor') {
-        //       this.style.backgroundColor = 'rgb(233, 32, 32)';
-        //     }
-        //   });
-
-        // }
+    
       </script>
   </body>
 </html>
