@@ -1,65 +1,76 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <link href="https://fonts.googleapis.com/css?family=Noto+Sans" rel="stylesheet">
 
-    <title>ViaWay: Bridge Information Dashboard</title>
-    <style>
-      
-      * {
-        box-sizing: border-box;
-      }
-      body {
-        margin: 0;
-        padding: 0;
-        /* font-family: Arial, sans-serif; */
-        font-family: 'Noto Sans', sans-serif;
-      }
-      header {
-        background-color: rgb(223, 239, 179);
-        color: #305711 ;
-        padding: 2px;
-        text-align: center;
-      }
+<head>
+  <meta charset="utf-8">
+  <link href="https://fonts.googleapis.com/css?family=Noto+Sans" rel="stylesheet">
 
-      h1, h4 {
+  <title>ViaWay: Bridge Information Dashboard</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      /* font-family: Arial, sans-serif; */
+      font-family: 'Noto Sans', sans-serif;
+    }
+
+    header {
+      background-color: rgb(203, 237, 180);
+      color: #305711;
+      padding: 2px;
+      text-align: center;
+    }
+
+    h1,
+    h4 {
       margin: 1;
       padding: 0;
     }
-      .row:after {
-        content: "";
-        display: table;
-        clear: both;
-      }
-      .column1 {
-        float: left;
-        width: 20%;
-        padding: 10px;
-        height: 100vh;
-        overflow-y: scroll;
-      }
-      .column2 {
-        float: right;
-        width: 80%;
-        padding: 10px;
-        height: 100vh;
-        overflow-y: scroll;
-      }
-      img {
-        width: 110%;
-        height: auto;
-        margin: 0 auto;
-        }
-      #map {
-        height: 100%;
-        width: 100%;
-      }
 
-      .bridge-status {
-      background-color: rgba(239, 247, 217, 0.819);
+    .row:after {
+      content: "";
+      display: table;
+      clear: both;
+    }
+
+    .column1 {
+      float: left;
+      width: 20%;
+      padding: 10px;
+      height: 100vh;
+      overflow-y: scroll;
+    }
+
+    .column2 {
+      float: right;
+      width: 80%;
+      padding: 10px;
+      height: 100vh;
+      overflow-y: scroll;
+    }
+
+    img {
+      width: 110%;
+      height: auto;
+      margin: 0 auto;
+    }
+
+    #map {
+      height: 100%;
+      width: 100%;
+    }
+
+    .bridge-status {
+      background-color: rgba(224, 239, 183, 0.719);
       border-radius: 10px;
       padding: 20px;
+      padding-bottom: 20px;
+      padding-top: 20px;
+
     }
 
     .bridge-status h3 {
@@ -71,7 +82,8 @@
     }
 
     .bridge-status.active {
-      background-color: #25362c75; /* Change the background color*/
+      background-color: #25362c75;
+      /* Change the background color*/
     }
 
     .buttons {
@@ -79,6 +91,12 @@
       justify-content: space-between;
       margin-top: 20px;
     }
+
+    .view-stats-btn {
+    background-color: rgb(16, 84, 194);
+    color: white;
+    /* add any other styling you want */
+  }
 
     button {
       border: none;
@@ -98,7 +116,7 @@
       color: black;
     }
 
-    .view_data{
+    .view_data {
       background-color: #104f30ef;
     }
 
@@ -106,39 +124,110 @@
       background-color: rgb(233, 32, 32);
     }
 
-    .bridge-status + .bridge-status {
+    .bridge-status+.bridge-status {
       margin-top: 20px;
+      margin-bottom: 20px;
+
     }
 
     hr {
-        border: none;
-        border-top: 2px solid rgba(29, 25, 25, 0.419);
-        
+      border: none;
+      border-top: 2px solid rgba(29, 25, 25, 0.419);
+
+    }
+
+    .popup2 {
+      display: none;
+      position: fixed;
+      z-index: 1;
+      padding-top: 100px;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0, 0, 0, 0.808);
+    }
+
+    .popup2-content {
+      margin: auto;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .popup2-content img {
+        width: 300px;
+        height: 300px;
+        margin: 10px;
       }
 
-      
+    /* .popup2 {
+      display: none;
+      position: fixed;
+      z-index: 9999;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      width: 80%;
+      max-width: 1000px;
+      max-height: 80%;
+      overflow-y: auto;
+      background-color: rgba(0, 0, 0, 0.5);
+    }
 
+    .popup2-content {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      gap: 20px;
+      padding: 20px;
+      background-color: white;
+      border-radius: 10px;
+    }
+ß
+    .popup2-content img {
+      max-width: 90%;
+      max-height: 90%;
+      object-fit: contain;
+      margin: auto;
+      display: block;
+    } */
 
-    </style>
-  </head>
-  <body>
-    <header>
-      <h1>ViaWay</h1>
-      <h4>Bridge Information Dashboard</h4>
-    </header>
+    */ .close {
+      color: rgb(3, 48, 10);
+      float: right;
+      font-size: 28px;
+      font-weight: bold;
+    }
 
-    <div class="row">
-      <div class="column1">
-        <!-- <h2>Icons</h2> -->
-        <!-- <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas ac libero tristique, tempus metus sed, rhoncus magna. Suspendisse potenti. Aenean dignissim augue vel quam accumsan, eu mollis elit viverra. Sed interdum nibh a mauris malesuada ullamcorper. Aliquam aliquet urna in blandit ultricies.</p> -->
-        <!-- <img src="/Users/admin/Desktop/UW MSTI/Quarter 2/514/project/bridgeFlaskDashboard/static/panel.png" alt="Image Description"> -->
+    .close:hover,
+    .close:focus {
+      color: black;
+      text-decoration: none;
+      cursor: pointer;
+    }
+  </style>
+</head>
 
-        <div class="bridge-status" id="bridge1" data-lat="47.64750" data-lng="-122.34967" data-size="80" data-status="Fair" data-bridge_name="Fremont Bridge">
+<body>
+  <header>
+    <h1>ViaWay</h1>
+    <h4>Bridge Information Dashboard</h4>
+  </header>
+
+  <div class="row">
+    <div class="column1">
+      <!-- <h2>Icons</h2> -->
+      <!-- <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas ac libero tristique, tempus metus sed, rhoncus magna. Suspendisse potenti. Aenean dignissim augue vel quam accumsan, eu mollis elit viverra. Sed interdum nibh a mauris malesuada ullamcorper. Aliquam aliquet urna in blandit ultricies.</p> -->
+      <!-- <img src="/Users/admin/Desktop/UW MSTI/Quarter 2/514/project/bridgeFlaskDashboard/static/panel.png" alt="Image Description"> -->
+
+      <!-- <div class="bridge-status" id="bridge1" data-lat="47.64750" data-lng="-122.34967" data-size="80" data-status="Fair" data-bridge_name="Fremont Bridge">
           <h3>Fremont Bridge</h3>
           <div class="buttons">
-            <!-- <button class="good">Good</button> -->
             <button class="fair">Fair</button>
-            <!-- <button class="poor">Poor</button> -->
           </div>
           <hr>
           <p>
@@ -147,237 +236,327 @@
           <strong>Length:</strong>242 ft (74 m)<br>
           <strong>Spans:</strong> Fremont Cut<br>
           <strong>Coordinates:</strong> 47.64750°N, 122.34967°W</p>
-          <!-- <div class="buttons">
-            <button class="view_data">View live status</button>
-            <button class="fair">Fair</button> 
-            <button class="poor">Poor</button> -->
-          <!-- </div> --> 
+  
       
-        </div>
+        </div> -->
 
-        <div class="bridge-status" id="bridge2" data-lat="47.65980" data-lng="-122.37622" data-size="200" data-status="Poor" data-bridge_name="Ballard Bridge">
-          <h3>Ballard Bridge</h3>
-          <div class="buttons">
-            <!-- <button class="good">Good</button> -->
-            <!-- <button class="fair">Fair</button> -->
-            <button class="poor">Poor</button>
-          </div>
-          <hr>
-          <p>
+      <div class="bridge-status" id="bridge1" data-lat="47.64750" data-lng="-122.34967" data-size="80"
+        data-status="Fair" data-bridge_name="Fremont Bridge">
+        <h3>Fremont Bridge</h3>
+        <div class="buttons">
+          <!-- <button class="good">Good</button> -->
+          <button class="fair">Fair</button>
+          <!-- <button class="poor">Poor</button> -->
+        </div>
+        <hr>
+        <p>
+          <strong>Year Opened:</strong> 1917<br>
+          <strong>Type:</strong> Bascule<br>
+          <strong>Length:</strong>242 ft (74 m)<br>
+          <strong>Spans:</strong> Fremont Cut<br>
+          <strong>Coordinates:</strong> 47.64750°N, 122.34967°W
+        </p>
+        <button class="view-stats-btn">View Statistics</button>
+      </div>
+
+      <div id="stats-popup" class="popup2">
+        <div class="popup2-content">
+          <span class="close">&times;</span>
+          <img src="/static/visualization_1_1.png">
+          <img src="/static/visualization_1_2.png">
+          <img src="/static/visualization_1_3.png">
+          <img src="/static/visualization_1_4.png">
+        </div>
+      </div>
+
+
+      <div class="bridge-status" id="bridge2" data-lat="47.65980" data-lng="-122.37622" data-size="200"
+        data-status="Poor" data-bridge_name="Ballard Bridge">
+        <h3>Ballard Bridge</h3>
+        <div class="buttons">
+          <!-- <button class="good">Good</button> -->
+          <!-- <button class="fair">Fair</button> -->
+          <button class="poor">Poor</button>
+        </div>
+        <hr>
+        <p>
           <strong>Year Opened:</strong> 1917<br>
           <strong>Type:</strong> Bascule<br>
           <strong>Length:</strong> 2,854 ft (870 m)<br>
           <strong>Spans:</strong> Salmon Bay<br>
-          <strong>Coordinates:</strong> 47.65980°N, 122.37622°W</p>
-          <div class="buttons">
-            <button class="view_data">View live status</button>
-            <!-- <button class="fair">Fair</button> -->
-            <!-- <button class="poor">Poor</button> -->
-          </div>
-      
+          <strong>Coordinates:</strong> 47.65980°N, 122.37622°W
+        </p>
+        <div class="buttons">
+          <button class="view-stats-btn">View Statistics</button>
+          <!-- <button class="fair">Fair</button> -->
+          <!-- <button class="poor">Poor</button> -->
         </div>
-
-        <div class="bridge-status" id="bridge3" data-lat="47.57112" data-lng="-122.35366" data-size="100" data-status="Good" data-bridge_name="George Washington Memorial Bridge">
-          <h3>George Washington Memorial Bridge</h3>
-          <div class="buttons">
-            <button class="good">Good</button>
-            <!-- <button class="fair">Fair</button> -->
-            <!-- <button class="poor">Poor</button> -->
+        <div id="stats-popup" class="popup2">
+          <div class="popup2-content">
+            <span class="close">&times;</span>
+            <img src="/static/visualization_1_1.png">
+            <img src="/static/visualization_1_2.png">
+            <img src="/static/visualization_1_3.png">
+            <img src="/static/visualization_1_4.png">
           </div>
-          <hr>
-          <p>
+        </div>
+  
+
+      </div>
+
+      <div class="bridge-status" id="bridge3" data-lat="47.57112" data-lng="-122.35366" data-size="100"
+        data-status="Good" data-bridge_name="George Washington Memorial Bridge">
+        <h3>George Washington Memorial Bridge</h3>
+        <div class="buttons">
+          <button class="good">Good</button>
+          <!-- <button class="fair">Fair</button> -->
+          <!-- <button class="poor">Poor</button> -->
+        </div>
+        <hr>
+        <p>
           <strong>Year Opened:</strong> 1932<br>
           <strong>Type:</strong> Cantilever and truss<br>
           <strong>Length:</strong> 2,945 ft (898 m)<br>
           <strong>Spans:</strong> Lake Union<br>
-          <strong>Coordinates:</strong> 47.57112°N, 122.35366°W</p>
-          <div class="buttons">
-            <button class="view_data">View live status</button>
-            <!-- <button class="fair">Fair</button> -->
-            <!-- <button class="poor">Poor</button> -->
-          </div>
-      
+          <strong>Coordinates:</strong> 47.57112°N, 122.35366°W
+        </p>
+        <div class="buttons">
+          <button class="view-stats-btn">View Statistics</button>
+          <!-- <button class="fair">Fair</button> -->
+          <!-- <button class="poor">Poor</button> -->
         </div>
 
-        <div class="bridge-status" id="bridge4" data-lat="47.58984" data-lng="-122.26942" data-size="1200" data-status="Good" data-bridge_name="Homer M. Hadley Memorial Bridge ">
-          <h3>Homer M. Hadley Memorial Bridge (Third Lake Washington Bridge)</h3>
-          <div class="buttons">
-            <button class="good">Good</button>
-            <!-- <button class="fair">Fair</button> -->
-            <!-- <button class="poor">Poor</button> -->
+        <div id="stats-popup" class="popup2">
+          <div class="popup2-content">
+            <span class="close">&times;</span>
+            <h1>Plots from Signal Analysis</h1>
+            <img src="/static/visualization_1_1.png">
+            <img src="/static/visualization_1_2.png">
+            <img src="/static/visualization_1_3.png">
+            <img src="/static/visualization_1_4.png">
           </div>
-          <hr>
-          <p>
+        </div>
+
+      </div>
+
+      <div class="bridge-status" id="bridge4" data-lat="47.58984" data-lng="-122.26942" data-size="1200"
+        data-status="Good" data-bridge_name="Homer M. Hadley Memorial Bridge ">
+        <h3>Homer M. Hadley Memorial Bridge (Third Lake Washington Bridge)</h3>
+        <div class="buttons">
+          <button class="good">Good</button>
+          <!-- <button class="fair">Fair</button> -->
+          <!-- <button class="poor">Poor</button> -->
+        </div>
+        <hr>
+        <p>
           <strong>Year Opened:</strong> 1989<br>
           <strong>Type:</strong> Floating pontoon<br>
           <strong>Length:</strong> 5,811 ft (1,771 m)<br>
           <strong>Span:</strong> Lake Washington<br>
-          <strong>Coordinates:</strong> 47.58984°N, 122.26942°W</p>
-          <div class="buttons">
-            <button class="view_data">View live status</button>
-            <!-- <button class="fair">Fair</button> -->
-            <!-- <button class="poor">Poor</button> -->
+          <strong>Coordinates:</strong> 47.58984°N, 122.26942°W
+        </p>
+        <div class="buttons">
+          <button class="view-stats-btn">View Statistics</button>
+          <!-- <button class="fair">Fair</button> -->
+          <!-- <button class="poor">Poor</button> -->
+        </div>
+        <div id="stats-popup" class="popup2">
+          <div class="popup2-content">
+            <span class="close">&times;</span>
+            <img src="/static/visualization_1_1.png">
+            <img src="/static/visualization_1_2.png">
+            <img src="/static/visualization_1_3.png">
+            <img src="/static/visualization_1_4.png">
           </div>
         </div>
-
-        
-
       </div>
 
-      
 
 
-      <div class="column2">
-        <!-- <h2>Bridge status monitor</h2> -->
-        <div id="map"></div>
-      </div>
     </div>
 
 
 
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC1of28Q-W-S5PAQzgdMS8ZuTs59Wjgmmc&callback=initMap"
+
+    <div class="column2">
+      <!-- <h2>Bridge status monitor</h2> -->
+      <div id="map"></div>
+    </div>
+  </div>
+
+
+
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC1of28Q-W-S5PAQzgdMS8ZuTs59Wjgmmc&callback=initMap"
     async defer></script>
-    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    <!-- <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> -->
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+  <!-- <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> -->
 
 
 
-    <script>
-        var map;
-        const locations = document.querySelectorAll('.bridge-status');
-        const mapDiv = document.getElementById('map');
-        function initMap() {
+  <script>
+    var map;
+    const locations = document.querySelectorAll('.bridge-status');
+    const mapDiv = document.getElementById('map');
+    function initMap() {
 
-          const bridge1_beg = { lat: 47.578419, lng: -122.203525 };
-          const bridge1_end = { lat: 47.579588, lng: -122.198354 };
-  
-          // # golden GeolocationCoordinates
-          const bridge2_beg = { lat: 37.825651 , lng: -122.479387 };
-          const bridge2_end = { lat: 37.811164, lng: -122.477530 };
-  
-  
-  
-          // const image ="https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png";
-  
-          // initialize map
-          map = new google.maps.Map(document.getElementById('map'), {
-            center: {lat: 47.579021, lng: -122.200467},
-            zoom: 16
-  
-          });
-  
-  
+      const bridge1_beg = { lat: 47.578419, lng: -122.203525 };
+      const bridge1_end = { lat: 47.579588, lng: -122.198354 };
 
-          function updateMap(lat, lng, size, status, bridge_name) 
-          {
-
-            const rad = parseInt(size);
-            const latLng = new google.maps.LatLng(lat, lng);
-            map.panTo(latLng);
-            marker = new google.maps.Marker({
-              position: latLng,
-              map: map
-            });
-
-       
-
-            console.log("inpopup");
+      // # golden GeolocationCoordinates
+      const bridge2_beg = { lat: 37.825651, lng: -122.479387 };
+      const bridge2_end = { lat: 37.811164, lng: -122.477530 };
 
 
 
-      const popup = new google.maps.InfoWindow({
-      content: `
+      // const image ="https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png";
+
+      // initialize map
+      map = new google.maps.Map(document.getElementById('map'), {
+        center: { lat: 47.579021, lng: -122.200467 },
+        zoom: 16
+
+      });
+
+
+
+      function updateMap(lat, lng, size, status, bridge_name) {
+
+        const rad = parseInt(size);
+        const latLng = new google.maps.LatLng(lat, lng);
+        map.panTo(latLng);
+        marker = new google.maps.Marker({
+          position: latLng,
+          map: map
+        });
+
+
+
+        console.log("inpopup");
+
+
+
+        const popup = new google.maps.InfoWindow({
+          content: `
         <div class='popup'>
           <h1 style='color: green; font-family: "Noto Sans", sans-serif;'><strong>${bridge_name}</strong></h1>
-          <h2 style="font-family: 'Noto Sans', sans-serif; color: black;">Status: <strong><span class='${status.toLowerCase()}' style='background-color: ${
-            status === "Good" ? "green" : status === "Poor" ? "red" : "yellow"
-          }; color: ${status === "Fair" ? "black" : "white"};'>${status}</span></strong></h2>
+          <h2 style="font-family: 'Noto Sans', sans-serif; color: black;">Status: <strong><span class='${status.toLowerCase()}' style='background-color: ${status === "Good" ? "green" : status === "Poor" ? "red" : "yellow"
+            }; color: ${status === "Fair" ? "black" : "white"};'>${status}</span></strong></h2>
 
           <img src="/static/visualization_{{ id }}.png" alt="Visualization">
         </div>
       `,
-    });
-
-    google.maps.event.addListener(popup, 'domready', function() {
-      const closeBtn = document.querySelector('.gm-ui-hover-effect');
-      closeBtn.style.width = '48px';  // increase the width of the close button
-      closeBtn.style.height = '48px';  // increase the height of the close button
-      closeBtn.style.top = '8px';  // adjust the position of the close button
-      closeBtn.style.right = '8px';  // adjust the position of the close button
-    });
-
-
-            marker.addListener("click", () => {
-              popup.open(map, marker);
-              // Draw the chart after the popup is opened
-              console.log("in click check");
-
-            });
-
-
-            circle = new google.maps.Circle({
-            strokeColor: "#FF0000",
-            strokeOpacity: 0.8,
-            strokeWeight: 2,
-            fillColor: "#B40404",
-            fillOpacity: 0.35,
-            map: map,
-            center: latLng,
-            radius: rad // radius in meters
-          });
-
-
-
-        }
-        
-
-        
-
-        function setActiveLocation(location) {
-          locations.forEach(loc => loc.classList.remove('active'));
-          location.classList.add('active');
-        }
-
-        locations.forEach(location => {
-          const lat = location.dataset.lat;
-          const lng = location.dataset.lng;
-          const size = location.dataset.size;
-          const status = location.dataset.status;
-          const bridge_name = location.dataset.bridge_name;
-
-
-          location.addEventListener('click', () => {
-            updateMap(lat, lng, size, status, bridge_name);
-            setActiveLocation(location);
-          });
         });
-  
-  
-        }
 
-
-
-      </script>
-
-      <script>
-        const bridgeStatusDivs = document.querySelectorAll('.bridge-status');
-
-        // Loop through all the bridge-status divs
-        bridgeStatusDivs.forEach((div) => {
-          // Add a click event listener to each div
-          div.addEventListener('click', () => {
-            // Remove the active class from all the bridge-status divs
-            bridgeStatusDivs.forEach((d) => {
-              d.classList.remove('active');
-            });
-
-            // Add the active class to the clicked bridge-status div
-            div.classList.add('active');
-          });
+        google.maps.event.addListener(popup, 'domready', function () {
+          const closeBtn = document.querySelector('.gm-ui-hover-effect');
+          closeBtn.style.width = '48px';  // increase the width of the close button
+          closeBtn.style.height = '48px';  // increase the height of the close button
+          closeBtn.style.top = '8px';  // adjust the position of the close button
+          closeBtn.style.right = '8px';  // adjust the position of the close button
         });
-        const bridgeStatuses = document.querySelectorAll('.bridge-status');
 
-    
-      </script>
-  </body>
+
+        marker.addListener("click", () => {
+          popup.open(map, marker);
+          // Draw the chart after the popup is opened
+          console.log("in click check");
+
+        });
+
+
+        circle = new google.maps.Circle({
+          strokeColor: "#FF0000",
+          strokeOpacity: 0.8,
+          strokeWeight: 2,
+          fillColor: "#B40404",
+          fillOpacity: 0.35,
+          map: map,
+          center: latLng,
+          radius: rad // radius in meters
+        });
+
+
+
+      }
+
+
+
+
+      function setActiveLocation(location) {
+        locations.forEach(loc => loc.classList.remove('active'));
+        location.classList.add('active');
+      }
+
+      locations.forEach(location => {
+        const lat = location.dataset.lat;
+        const lng = location.dataset.lng;
+        const size = location.dataset.size;
+        const status = location.dataset.status;
+        const bridge_name = location.dataset.bridge_name;
+
+
+        location.addEventListener('click', () => {
+          updateMap(lat, lng, size, status, bridge_name);
+          setActiveLocation(location);
+        });
+      });
+
+
+    }
+
+
+
+  </script>
+
+  <script>
+    const bridgeStatusDivs = document.querySelectorAll('.bridge-status');
+
+    // Loop through all the bridge-status divs
+    bridgeStatusDivs.forEach((div) => {
+      // Add a click event listener to each div
+      div.addEventListener('click', () => {
+        // Remove the active class from all the bridge-status divs
+        bridgeStatusDivs.forEach((d) => {
+          d.classList.remove('active');
+        });
+
+        // Add the active class to the clicked bridge-status div
+        div.classList.add('active');
+      });
+    });
+    const bridgeStatuses = document.querySelectorAll('.bridge-status');
+
+
+  </script>
+
+  <script>
+    // Get the button that opens the popup
+    var viewStatsBtn = document.querySelector(".view-stats-btn");
+
+    // Get the popup
+    var statsPopup = document.getElementById("stats-popup");
+
+    // Get the <span> element that closes the popup
+    var closeBtn = statsPopup.querySelector(".close");
+
+    // When the user clicks the button, open the popup
+    viewStatsBtn.onclick = function () {
+      statsPopup.style.display = "block";
+    }
+
+    // When the user clicks on <span> (x), close the popup
+    closeBtn.onclick = function () {
+      statsPopup.style.display = "none";
+    }
+
+    // When the user clicks anywhere outside of the popup, close it
+    window.onclick = function (event) {
+      if (event.target == statsPopup) {
+        statsPopup.style.display = "none";
+      }
+    }
+
+  </script>
+</body>
+
 </html>
