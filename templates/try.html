@@ -283,21 +283,28 @@
 
             console.log("inpopup");
 
-            const popup = new google.maps.InfoWindow({
-            content: `
-              <div class='popup'>
-                <h1 style='color: green; font-family: "Noto Sans", sans-serif;'><strong>${bridge_name}</strong></h1>
-                <h2 style="font-family: 'Noto Sans', sans-serif; color: black;">Status: <strong><span class='${status.toLowerCase()}' style='background-color: ${
-        status === "Good" ? "green" : status === "Poor" ? "red" : "yellow"
-      }; color: ${status === "Fair" ? "black" : "white"};'>${status}</span></strong></h2>
 
 
-                <img src="/static/visualization_{{ id }}.png" alt="Visualization">
-              </div>
-            `,
-          });
-            console.log("outpopup");
+      const popup = new google.maps.InfoWindow({
+      content: `
+        <div class='popup'>
+          <h1 style='color: green; font-family: "Noto Sans", sans-serif;'><strong>${bridge_name}</strong></h1>
+          <h2 style="font-family: 'Noto Sans', sans-serif; color: black;">Status: <strong><span class='${status.toLowerCase()}' style='background-color: ${
+            status === "Good" ? "green" : status === "Poor" ? "red" : "yellow"
+          }; color: ${status === "Fair" ? "black" : "white"};'>${status}</span></strong></h2>
 
+          <img src="/static/visualization_{{ id }}.png" alt="Visualization">
+        </div>
+      `,
+    });
+
+    google.maps.event.addListener(popup, 'domready', function() {
+      const closeBtn = document.querySelector('.gm-ui-hover-effect');
+      closeBtn.style.width = '48px';  // increase the width of the close button
+      closeBtn.style.height = '48px';  // increase the height of the close button
+      closeBtn.style.top = '8px';  // adjust the position of the close button
+      closeBtn.style.right = '8px';  // adjust the position of the close button
+    });
 
 
             marker.addListener("click", () => {
